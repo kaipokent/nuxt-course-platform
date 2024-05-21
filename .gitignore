@@ -6,6 +6,7 @@ node_modules
 .output
 .env
 dist
+.idea/*
 
 # Local Netlify folder
 .netlify
