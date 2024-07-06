@@ -3,7 +3,7 @@ const course = useCourse();
 const route = useRoute();
 
 definePageMeta({
-  middleware: function ({ params }, from) {
+  middleware: function ({ params }) {
     const course = useCourse();
 
     const chapter = course.chapters.find(
