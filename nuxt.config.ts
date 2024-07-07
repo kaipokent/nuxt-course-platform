@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
+      include: undefined,
       exclude: ['/*'], // We implement our own auth behaviour in the auth middleware
     },
   },

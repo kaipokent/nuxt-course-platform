@@ -5,10 +5,12 @@ const supabase = useSupabaseClient();
 async function signInWithGit(
   provider: 'github' | 'gitlab',
 ) {
-  const { data, error } =
-    await supabase.auth.signInWithOAuth({
-      provider,
-    });
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${window.location.origin}/confirm`,
+    },
+  });
 
   if (error) {
     console.error(error);
