@@ -1,6 +1,5 @@
 import type {
   Chapter,
-  Course,
   Lesson,
   LessonWithPath,
 } from '~/types/course';
