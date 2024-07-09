@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
+    '@pinia/nuxt',
   ],
   supabase: {
     redirectOptions: {

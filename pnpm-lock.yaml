@@ -24,6 +24,9 @@ importers:
       '@nuxtjs/tailwindcss':
         specifier: ^6.9.3
         version: 6.12.0(rollup@4.17.2)
+      '@pinia/nuxt':
+        specifier: ^0.5.1
+        version: 0.5.1(magicast@0.3.4)(rollup@4.17.2)(vue@3.4.27)
       '@prisma/client':
         specifier: ^5.16.1
         version: 5.16.1(prisma@5.16.1)
@@ -36,6 +39,9 @@ importers:
       '@vueuse/nuxt':
         specifier: ^10.11.0
         version: 10.11.0(magicast@0.3.4)(nuxt@3.12.2(@opentelemetry/api@1.8.0)(@parcel/watcher@2.4.1)(@types/node@20.12.11)(@unocss/reset@0.60.0)(encoding@0.1.13)(floating-vue@5.2.2(@nuxt/kit@3.12.3(magicast@0.3.4)(rollup@4.17.2))(vue@3.4.27))(ioredis@5.4.1)(magicast@0.3.4)(rollup@4.17.2)(terser@5.31.0)(unocss@0.60.0(postcss@8.4.38)(rollup@4.17.2)(vite@5.3.1(@types/node@20.12.11)(terser@5.31.0)))(vite@5.3.1(@types/node@20.12.11)(terser@5.31.0)))(rollup@4.17.2)(vue@3.4.27)
+      pinia:
+        specifier: ^2.1.7
+        version: 2.1.7(vue@3.4.27)
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -1012,6 +1018,9 @@ packages:
   '@parcel/watcher@2.4.1':
     resolution: {integrity: sha512-HNjmfLQEVRZmHRET336f20H/8kOozUGwk7yajvsonjNxbj2wBTK1WsQuHkD5yYh9RxFGL2EyDHryOihOwUoKDA==}
     engines: {node: '>= 10.0.0'}
+
+  '@pinia/nuxt@0.5.1':
+    resolution: {integrity: sha512-6wT6TqY81n+7/x3Yhf0yfaJVKkZU42AGqOR0T3+UvChcaOJhSma7OWPN64v+ptYlznat+fS1VTwNAcbi2lzHnw==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -3285,6 +3294,18 @@ packages:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
 
+  pinia@2.1.7:
+    resolution: {integrity: sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+
   pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
@@ -4257,17 +4278,6 @@ packages:
 
   vue-bundle-renderer@2.1.0:
     resolution: {integrity: sha512-uZ+5ZJdZ/b43gMblWtcpikY6spJd0nERaM/1RtgioXNfWFbjKlUwrS8HlrddN6T2xtptmOouWclxLUkpgcVX3Q==}
-
-  vue-demi@0.14.7:
-    resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
-    engines: {node: '>=12'}
-    hasBin: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
 
   vue-demi@0.14.8:
     resolution: {integrity: sha512-Uuqnk9YE9SsWeReYqK2alDI5YzciATE0r2SkA6iMAtuXvNTMNACJLJEXNXaEy94ECuBe4Sk6RzRU80kjdbIo1Q==}
@@ -5692,6 +5702,18 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.4.1
       '@parcel/watcher-win32-x64': 2.4.1
 
+  '@pinia/nuxt@0.5.1(magicast@0.3.4)(rollup@4.17.2)(vue@3.4.27)':
+    dependencies:
+      '@nuxt/kit': 3.12.3(magicast@0.3.4)(rollup@4.17.2)
+      pinia: 2.1.7(vue@3.4.27)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - magicast
+      - rollup
+      - supports-color
+      - typescript
+      - vue
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -6445,7 +6467,7 @@ snapshots:
     dependencies:
       '@vueuse/core': 10.9.0(vue@3.4.29)
       '@vueuse/shared': 10.9.0(vue@3.4.29)
-      vue-demi: 0.14.7(vue@3.4.29)
+      vue-demi: 0.14.8(vue@3.4.29)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -6475,7 +6497,7 @@ snapshots:
       '@types/web-bluetooth': 0.0.20
       '@vueuse/metadata': 10.9.0
       '@vueuse/shared': 10.9.0(vue@3.4.29)
-      vue-demi: 0.14.7(vue@3.4.29)
+      vue-demi: 0.14.8(vue@3.4.29)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -6484,7 +6506,7 @@ snapshots:
     dependencies:
       '@vueuse/core': 10.9.0(vue@3.4.29)
       '@vueuse/shared': 10.9.0(vue@3.4.29)
-      vue-demi: 0.14.7(vue@3.4.29)
+      vue-demi: 0.14.8(vue@3.4.29)
     optionalDependencies:
       focus-trap: 7.5.4
     transitivePeerDependencies:
@@ -6526,7 +6548,7 @@ snapshots:
 
   '@vueuse/shared@10.9.0(vue@3.4.29)':
     dependencies:
-      vue-demi: 0.14.7(vue@3.4.29)
+      vue-demi: 0.14.8(vue@3.4.29)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -8463,6 +8485,12 @@ snapshots:
 
   pify@2.3.0: {}
 
+  pinia@2.1.7(vue@3.4.27):
+    dependencies:
+      '@vue/devtools-api': 6.6.1
+      vue: 3.4.27
+      vue-demi: 0.14.8(vue@3.4.27)
+
   pirates@4.0.6: {}
 
   pkg-types@1.1.1:
@@ -9524,10 +9552,6 @@ snapshots:
   vue-bundle-renderer@2.1.0:
     dependencies:
       ufo: 1.5.3
-
-  vue-demi@0.14.7(vue@3.4.29):
-    dependencies:
-      vue: 3.4.29
 
   vue-demi@0.14.8(vue@3.4.27):
     dependencies:
