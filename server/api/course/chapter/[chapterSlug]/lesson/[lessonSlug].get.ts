@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import protectRoute from '~/server/utils/protectRoute';
 
 const prisma = new PrismaClient();
 
@@ -8,6 +9,10 @@ type LessonParams = {
 };
 
 export default defineEventHandler(async (event) => {
+  if (event.context.params?.chapterSlug !== '1-chapter-1') {
+    protectRoute(event);
+  }
+
   const { chapterSlug, lessonSlug } = event.context
     .params as LessonParams;
 
