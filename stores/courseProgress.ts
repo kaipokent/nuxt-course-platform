@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia';
 import type { RemovableRef } from '@vueuse/core';
+import type { CourseProgress } from '~/types/course';
 
 export const useCourseProgress = defineStore(
   'courseProgress',
   () => {
     // Initialize progress from local storage
-    const progress: RemovableRef<
-      Record<string, Record<string, boolean>>
-    > = useLocalStorage('progress', {});
+    const progress: RemovableRef<CourseProgress> = ref({});
     const initialized = ref(false);
 
     async function initialize() {
@@ -15,7 +14,16 @@ export const useCourseProgress = defineStore(
       if (initialized.value) return;
       initialized.value = true;
 
-      // TODO: Fetch user progress from endpoint
+      const { data: userProgress } =
+        await useFetch<CourseProgress>(
+          '/api/user/progress',
+          { headers: useRequestHeaders(['cookie']) },
+        );
+
+      // Update progress value
+      if (userProgress.value) {
+        progress.value = userProgress.value;
+      }
     }
 
     const toggleComplete = async (
@@ -45,7 +53,25 @@ export const useCourseProgress = defineStore(
           [lesson]: !currentProgress,
         };
 
-        // TODO: Update in DB
+        try {
+          await $fetch(
+            `/api/course/chapter/${chapter}/lesson/${lesson}/progress`,
+            {
+              method: 'POST',
+              body: {
+                completed: !currentProgress,
+              },
+            },
+          );
+        } catch (error) {
+          console.error(error);
+
+          // If the request failed, revert the progress value
+          progress.value[chapter] = {
+            ...progress.value[chapter],
+            [lesson]: currentProgress,
+          };
+        }
       }
     };
 
