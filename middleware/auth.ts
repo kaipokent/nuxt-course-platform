@@ -1,14 +1,27 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  const user = useSupabaseUser();
-  const cookieName =
-    useRuntimeConfig().public.supabase.cookieName;
+export default defineNuxtRouteMiddleware(
+  async (to, from) => {
+    const user = useSupabaseUser();
+    const { data: hasAccess } = await useFetch(
+      '/api/user/hasAccess',
+      {
+        headers: useRequestHeaders(['cookie']),
+      },
+    );
+    const cookieName =
+      useRuntimeConfig().public.supabase.cookieName;
 
-  if (
-    user.value ||
-    to.params.chapterSlug === '1-chapter-1'
-  ) {
-    return;
-  }
-  useCookie(`${cookieName}-redirect-path`).value = to.path;
-  return navigateTo('/login');
-});
+    if (
+      hasAccess.value ||
+      to.params.chapterSlug === '1-chapter-1'
+    ) {
+      return;
+    } else if (user.value && !hasAccess.value) {
+      // Prevent logging in with Github if user has not purchased course
+      const client = useSupabaseClient();
+      await client.auth.signOut();
+    }
+    useCookie(`${cookieName}-redirect-path`).value =
+      to.path;
+    return navigateTo('/login');
+  },
+);
