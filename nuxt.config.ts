@@ -1,5 +1,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  runtimeConfig: {
+    stripeSecret: '',
+    stripeWebhookSecret: '',
+    public: {
+      stripeKey: '',
+    },
+  },
   nitro: {
     prerender: {
       routes: ['/landing'],
